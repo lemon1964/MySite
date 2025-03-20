@@ -1,4 +1,3 @@
-# FROM python:3.10-slim
 FROM python:3.10.6
 
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -18,7 +17,7 @@ RUN chmod +x /code/mysite/manage.py
 
 
 
-# # Используем внешний образ, который вы запушили в Docker Hub
+# # Используем внешний образ из Docker Hub
 # FROM lemon1964/mysite:latest
 
 # # Устанавливаем рабочую директорию
