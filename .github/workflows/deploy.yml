@@ -10,18 +10,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      REDIS_HOST: ${{ secrets.REDIS_HOST }}
+      REDIS_PORT: ${{ secrets.REDIS_PORT }}
+      REDIS_DB: ${{ secrets.REDIS_DB }}
+      CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
+      CELERY_RESULT_BACKEND: ${{ secrets.CELERY_RESULT_BACKEND }}
       STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY }}
       STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
       STRIPE_API_VERSION: ${{ secrets.STRIPE_API_VERSION }}
       STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
       EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
       EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      CELERY_BROKER_URL: ${{ secrets.CELERY_BROKER_URL }}
       SOCIAL_AUTH_GOOGLE_OAUTH2_KEY: ${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY }}
       SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET: ${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET }}
     
