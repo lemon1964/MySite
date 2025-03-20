@@ -1,15 +1,16 @@
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse_lazy
-import environ
-
+from decouple import config
+# import environ
+  # ch
 # Инициализация окружения и чтение переменных из .env файла
-env = environ.Env()
-environ.Env.read_env()
+# env = environ.Env()
+# environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # THUMBNAIL_DEBUG = True
 
@@ -162,8 +163,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -171,8 +172,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
@@ -196,7 +197,11 @@ REST_FRAMEWORK = {
 
 ASGI_APPLICATION = 'mysite.asgi.application'
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51OzityP21hgowpHEGyOcxBPx12wzqomvdQiPS0VNnj7zvgTAnV8pDXpPHcggabW9jsqsj7LMOoK4Gs3PeNDSQLZM00ZCF7gFkE' # Publishable key
-STRIPE_SECRET_KEY = 'sk_test_51OzityP21hgowpHErLf8XwsJzSjvSnPnRCjWZyxFYqr331a8H4T9o7grxdSe3KDAfXmSxsxZwsTBXEkMl3g5XSvB00DvtCyum6'      # Secret key
-STRIPE_API_VERSION = '2022-08-01'
-STRIPE_WEBHOOK_SECRET = 'whsec_5b81aa48721e5af7cccfa1fa2f1373f9cc97a238541a384c26cf59c0ac541d29'
+STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+STRIPE_API_VERSION = config('STRIPE_API_VERSION')
+STRIPE_WEBHOOK_SECRET = ('STRIPE_WEBHOOK_SECRET')
+# STRIPE_PUBLISHABLE_KEY = 'pk_test_51OzityP21hgowpHEGyOcxBPx12wzqomvdQiPS0VNnj7zvgTAnV8pDXpPHcggabW9jsqsj7LMOoK4Gs3PeNDSQLZM00ZCF7gFkE' # Publishable key
+# STRIPE_SECRET_KEY = 'sk_test_51OzityP21hgowpHErLf8XwsJzSjvSnPnRCjWZyxFYqr331a8H4T9o7grxdSe3KDAfXmSxsxZwsTBXEkMl3g5XSvB00DvtCyum6'      # Secret key
+# STRIPE_API_VERSION = '2022-08-01'
+# STRIPE_WEBHOOK_SECRET = 'whsec_5b81aa48721e5af7cccfa1fa2f1373f9cc97a238541a384c26cf59c0ac541d29'

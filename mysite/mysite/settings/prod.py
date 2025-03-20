@@ -11,18 +11,18 @@ ALLOWED_HOSTS = ['.mysite.com']
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': env('POSTGRES_DB'),
-       'USER': env('POSTGRES_USER'),
-       'PASSWORD': env('POSTGRES_PASSWORD'),
+       'NAME': config('POSTGRES_DB'),
+       'USER': config('POSTGRES_USER'),
+       'PASSWORD': config('POSTGRES_PASSWORD'),
        'HOST': 'db',
        'PORT': 5432,
    }
 }
 
 # Продакшн настройки Redis
-REDIS_HOST = env('REDIS_HOST')  # Имя сервиса Redis из Docker Compose
-REDIS_PORT = env
-REDIS_DB = env('REDIS_DB')
+REDIS_HOST = config('REDIS_HOST')  # Имя сервиса Redis из Docker Compose
+REDIS_PORT = config('REDIS_PORT')
+REDIS_DB = config('REDIS_DB')
 
 CHANNEL_LAYERS = {
     'default': {
@@ -50,8 +50,8 @@ SESSION_COOKIE_SECURE = True
 SECURE_SSL_REDIRECT = True
 
 # Добавьте конфигурацию для Celery
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
