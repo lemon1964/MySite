@@ -60,5 +60,5 @@ python-decouple==3.8
 # django-environ==0.12.0
 
 
-# pip install -U -r requirements.txt    в проект
+# pip install -U -r requirements.txt    в проектм
 # pip freeze > requirements.txt         из проекта
