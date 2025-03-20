@@ -39,13 +39,13 @@ services:
       - rabbitmq
       - db
 
-  flower:
-    image: mher/flower
-    restart: always
-    ports:
-      - "5555:5555"
-    environment:
-      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+  # flower:
+  #   image: mher/flower
+  #   restart: always
+  #   ports:
+  #     - "5555:5555"
+  #   environment:
+  #     - CELERY_BROKER_URL=${CELERY_BROKER_URL}
 
   web:
     build: .

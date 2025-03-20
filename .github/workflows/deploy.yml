@@ -34,9 +34,9 @@ jobs:
 
       - name: Set up Docker
         run: |
-          docker build -t mysite .
-          docker tag mysite registry.render.com/lemon/mysite:latest
-          docker push registry.render.com/lemon/mysite:latest
+          docker build -t MySite .
+          docker tag mysite registry.render.com/lemon/MySite:latest
+          docker push registry.render.com/lemon/MySite:latest
 
     #   - name: Run migrations
     #     run: |
