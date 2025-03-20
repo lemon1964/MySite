@@ -6,6 +6,7 @@ ADMINS = [
     ('Usermhan', 'Usermhan@yandex.ru'),
 ]
 
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'mysite.com']
 ALLOWED_HOSTS = ['.mysite.com']
 
 DATABASES = {
