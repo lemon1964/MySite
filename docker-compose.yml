@@ -6,15 +6,15 @@ services:
   #   volumes:
   #     - ./data/cache:/data
 
-  db:
-    image: postgres:16.2
-    restart: always
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  # db:
+  #   image: postgres:16.2
+  #   restart: always
+  #   volumes:
+  #     - ./data/db:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
 
   # rabbitmq:
   #   image: rabbitmq:management
@@ -72,10 +72,10 @@ services:
       - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
-    depends_on:
-      - db
-      - cache
-      - rabbitmq
+    # depends_on:
+    #   - db
+      # - cache
+      # - rabbitmq
 
   # daphne:
   #   build: .
@@ -90,13 +90,13 @@ services:
   #     - db
   #     - cache
 
-  nginx:
-    image: nginx:1.23.1
-    restart: always
-    volumes:
-      - ./config/nginx:/etc/nginx/templates
-      - .:/code
-      - ./static:/code/mysite/static/
-    ports:
-      - "80:80"
-      - "443:443"
+  # nginx:
+  #   image: nginx:1.23.1
+  #   restart: always
+  #   volumes:
+  #     - ./config/nginx:/etc/nginx/templates
+  #     - .:/code
+  #     - ./static:/code/mysite/static/
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
