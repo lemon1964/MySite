@@ -1,0 +1,22 @@
+{% extends 'base_main.html' %}
+{% load posts_tags %}
+
+<!-- {% block breadcrumbs %}
+{% if perms.posts.change_post %}
+<p><a href="{% url 'posts:edit_page' post.slug %}">Редактировать</a></p>
+{% endif %}
+{% endblock %} -->
+
+{% block cont %}
+
+<div class="content-text">
+<h1>{{post.title}}</h1>
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% endif %}
+
+{{post.content|markdown}}
+</div>
+{% endblock %}
+
