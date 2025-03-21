@@ -25,9 +25,9 @@ RUN chmod +x /code/mysite/manage.py
 
 # ENV PYTHONPATH="/code"ю
 # # Использование gunicorn для продакшн
-# CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "mysite.mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
 
-CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:8000"]
 
 
 
