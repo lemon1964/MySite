@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/code
     environment:
-      - PORT=10000  # Указание порта для Render
+      # - PORT=10000  # Указание порта для Render
       # - DB_HOST=${DB_HOST}
       # - DB_HOST=db
       - DJANGO_SETTINGS_MODULE=mysite.settings.prod
@@ -33,39 +33,39 @@ services:
     #   - db
     #   # - cache
     #   # - rabbitmq
-    ports:
-      - "10000:10000"
-    networks:
-      - mynetwork 
+    # ports:
+    #   - "10000:10000"
+    # networks:
+    #   - mynetwork 
 
-  db:
-    image: postgres:16.2
-    restart: always
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      # - "3002:5432"
-      - "5432:5432"
-    networks:
-    - mynetwork
+  # db:
+  #   image: postgres:16.2
+  #   restart: always
+  #   volumes:
+  #     - ./data/db:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   ports:
+  #     # - "3002:5432"
+  #     - "5432:5432"
+  #   networks:
+  #   - mynetwork
 
 
-  nginx:
-    image: nginx:1.23.1
-    restart: always
-    volumes:
-      - ./config/nginx:/etc/nginx/templates
-      - .:/code
-      - ./static:/code/mysite/static/
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - mynetwork
+  # nginx:
+  #   image: nginx:1.23.1
+  #   restart: always
+  #   volumes:
+  #     - ./config/nginx:/etc/nginx/templates
+  #     - .:/code
+  #     - ./static:/code/mysite/static/
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   networks:
+  #     - mynetwork
 
   # rabbitmq:
   #   image: rabbitmq:management
@@ -119,6 +119,6 @@ services:
   #   volumes:
   #     - ./data/cache:/data
 
-networks:
-  mynetwork:
-    driver: bridge
+# networks:
+#   mynetwork:
+#     driver: bridge
