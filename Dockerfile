@@ -23,8 +23,9 @@ COPY wait-for-it.sh /code/wait-for-it.sh
 RUN chmod +x /code/wait-for-it.sh
 RUN chmod +x /code/mysite/manage.py
 
-# ENV PYTHONPATH="/code"ю
+
 # # Использование gunicorn для продакшн
+ENV PYTHONPATH="/code"
 CMD ["gunicorn", "mysite.mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 # CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:8000"]
