@@ -6,8 +6,7 @@ services:
   #   volumes:
   #     - ./data/cache:/data
 
-  postgres:
-  # db:
+  db:
     image: postgres:16.2
     restart: always
     volumes:
@@ -17,7 +16,7 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
-      - "5433:5432"
+      - "5432:5433"
     networks:
     - mynetwork
 
@@ -54,8 +53,7 @@ services:
 
   web:
     build: .
-    command: ["./wait-for-it.sh", "postgres:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
-    # command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+    command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
       - .:/code
@@ -80,8 +78,7 @@ services:
       - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
     depends_on:
-      - postgres
-      # - db
+      - db
       # - cache
       # - rabbitmq
     ports:
