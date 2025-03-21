@@ -8,7 +8,8 @@ services:
     volumes:
       - .:/code
     environment:
-      - DB_HOST=db
+      - DB_HOST=${DB_HOST}
+      # - DB_HOST=db
       - DJANGO_SETTINGS_MODULE=mysite.settings.prod
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
