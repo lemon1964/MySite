@@ -16,7 +16,7 @@ DATABASES = {
        'NAME': config('POSTGRES_DB'),
        'USER': config('POSTGRES_USER'),
        'PASSWORD': config('POSTGRES_PASSWORD'),
-       'HOST': 'localhost',  # Используйте localhost на Render
+        'HOST': 'db',  # Указание на контейнер базы данных, который называется db
     #    'HOST': os.getenv('DB_HOST', 'db'),
     #    'HOST': 'db',
        'PORT': 5432,
