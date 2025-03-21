@@ -4,12 +4,12 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Устанавливаем системные библиотеки для uwsgi
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libssl-dev \
-    libpq-dev \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y \
+#     build-essential \
+#     libssl-dev \
+#     libpq-dev \
+#     gcc \
+#     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /code
 
