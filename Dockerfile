@@ -16,7 +16,8 @@ RUN chmod +x /code/wait-for-it.sh
 RUN chmod +x /code/mysite/manage.py
 
 
-CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:10000"]
+# CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:8000"]
 
 # # Использование gunicorn для продакшн
 # ENV PYTHONPATH="/code"

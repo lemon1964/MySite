@@ -18,7 +18,6 @@ DATABASES = {
        'PASSWORD': config('POSTGRES_PASSWORD'),
         'HOST': 'db',  # Указание на контейнер базы данных, который называется db
     #    'HOST': os.getenv('DB_HOST', 'db'),
-    #    'HOST': 'db',
        'PORT': 5432,
    }
 }
