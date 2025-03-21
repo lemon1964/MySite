@@ -3,14 +3,6 @@ FROM python:3.10.6
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Устанавливаем системные библиотеки для uwsgi
-# RUN apt-get update && apt-get install -y \
-#     build-essential \
-#     libssl-dev \
-#     libpq-dev \
-#     gcc \
-#     && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /code
 
 RUN pip install --upgrade pip
