@@ -15,8 +15,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
+    # ports:
+    #   - "5432:5432"
 
   # rabbitmq:
   #   image: rabbitmq:management
@@ -79,8 +79,8 @@ services:
       - db
       - cache
       - rabbitmq
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
 
   # daphne:
   #   build: .
