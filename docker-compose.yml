@@ -29,12 +29,12 @@ services:
       - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
-    depends_on:
-      - db
-      # - cache
-      # - rabbitmq
+    # depends_on:
+    #   - db
+    #   # - cache
+    #   # - rabbitmq
     ports:
-      - "8000:8000"
+      - "10000:10000"
     networks:
       - mynetwork 
 
