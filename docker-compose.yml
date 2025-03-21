@@ -17,6 +17,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
+    networks:
+    - mynetwork
 
   # rabbitmq:
   #   image: rabbitmq:management
@@ -81,6 +83,8 @@ services:
       - rabbitmq
     ports:
       - "8000:8000"
+    networks:
+      - mynetwork 
 
   # daphne:
   #   build: .
@@ -105,3 +109,9 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
