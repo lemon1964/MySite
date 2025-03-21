@@ -3,6 +3,7 @@ services:
 
   web:
     build: .
+    command: ["--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     # command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
