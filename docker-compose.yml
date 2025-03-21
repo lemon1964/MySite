@@ -6,17 +6,17 @@ services:
     volumes:
       - ./data/cache:/data
 
-  db:
-    image: postgres:16.2
-    restart: always
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
+  # db:
+  #   image: postgres:16.2
+  #   restart: always
+  #   volumes:
+  #     - ./data/db:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   ports:
+  #     - "5432:5432"
 
   rabbitmq:
     image: rabbitmq:management
@@ -39,7 +39,7 @@ services:
       - .:/code
     depends_on:
       - rabbitmq
-      - db
+      # - db
 
   # flower:
   #   image: mher/flower
@@ -75,7 +75,7 @@ services:
       - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
     depends_on:
-      - db
+      # - db
       - cache
       - rabbitmq
     ports:
@@ -91,7 +91,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=mysite.settings.prod
     depends_on:
-      - db
+      # - db
       - cache
 
   nginx:
