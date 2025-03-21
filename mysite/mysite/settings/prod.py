@@ -1,3 +1,4 @@
+import os
 from .base import *
 
 DEBUG = False
@@ -15,6 +16,7 @@ DATABASES = {
        'NAME': config('POSTGRES_DB'),
        'USER': config('POSTGRES_USER'),
        'PASSWORD': config('POSTGRES_PASSWORD'),
+    #    'HOST': os.getenv('DB_HOST', 'db'),
        'HOST': 'db',
        'PORT': 5432,
    }
