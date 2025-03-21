@@ -6,7 +6,7 @@ services:
   #   volumes:
   #     - ./data/cache:/data
 
-  postgresQ:
+  postgres:
   # db:
     image: postgres:16.2
     restart: always
@@ -54,13 +54,13 @@ services:
 
   web:
     build: .
-    command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+    # command: ["./wait-for-it.sh", "db:5432", "--", "uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
     restart: always
     volumes:
       - .:/code
     environment:
-      - DB_HOST=postgresQ
-      # - DB_HOST=db
+      - DB_HOST=db
       - DJANGO_SETTINGS_MODULE=mysite.settings.prod
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -80,7 +80,8 @@ services:
       - SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=${SOCIAL_AUTH_GOOGLE_OAUTH2_KEY}
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
     depends_on:
-      - db
+      - postgres
+      # - db
       # - cache
       # - rabbitmq
     ports:
