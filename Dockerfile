@@ -15,6 +15,9 @@ COPY wait-for-it.sh /code/wait-for-it.sh
 RUN chmod +x /code/wait-for-it.sh
 RUN chmod +x /code/mysite/manage.py
 
+# Использование gunicorn для продакшн
+CMD ["gunicorn", "mysite.wsgi:application", "--bind", "0.0.0.0:8000"]
+
 
 
 # # Используем внешний образ из Docker Hub
