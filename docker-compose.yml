@@ -79,8 +79,8 @@ services:
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
     depends_on:
       - db
-      - cache
-      - rabbitmq
+      # - cache
+      # - rabbitmq
     ports:
       - "8000:8000"
     networks:
