@@ -48,13 +48,17 @@ jobs:
         run: |
           echo ${{ secrets.SECRET_KEY }}
           echo ${{ secrets.DATABASE_URL }}
-          echo ${{ secrets.POSTGRES_DB}}
+
+      - name: Check environment variables
+        run: |
+          echo $DATABASE_URL
+          echo $POSTGRES_DB
         
-      - name: Run migrations
-        run: |
-          docker run --rm -v $(pwd):/code -e SECRET_KEY="${{ secrets.SECRET_KEY }}" -e POSTGRES_DB="${{ secrets.POSTGRES_DB }}" -e POSTGRES_USER="${{ secrets.POSTGRES_USER }}" -e POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -e DB_HOST="${{ secrets.DB_HOST }}" -e DB_PORT="${{ secrets.DB_PORT }}" -e REDIS_HOST="${{ secrets.REDIS_HOST }}" -e REDIS_PORT="${{ secrets.REDIS_PORT }}" -e REDIS_DB="${{ secrets.REDIS_DB }}" -e CELERY_BROKER_URL="${{ secrets.CELERY_BROKER_URL }}" -e CELERY_RESULT_BACKEND="${{ secrets.CELERY_RESULT_BACKEND }}" -e STRIPE_PUBLISHABLE_KEY="${{ secrets.STRIPE_PUBLISHABLE_KEY }}" -e STRIPE_SECRET_KEY="${{ secrets.STRIPE_SECRET_KEY }}" -e STRIPE_API_VERSION="${{ secrets.STRIPE_API_VERSION }}" -e STRIPE_WEBHOOK_SECRET="${{ secrets.STRIPE_WEBHOOK_SECRET }}" -e EMAIL_HOST_USER="${{ secrets.EMAIL_HOST_USER }}" -e EMAIL_HOST_PASSWORD="${{ secrets.EMAIL_HOST_PASSWORD }}" -e SOCIAL_AUTH_GOOGLE_OAUTH2_KEY="${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY }}" -e SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET="${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET }}" mysite python /code/mysite/manage.py migrate --noinput
+      # - name: Run migrations
+      #   run: |
+      #     docker run --rm -v $(pwd):/code -e SECRET_KEY="${{ secrets.SECRET_KEY }}" -e POSTGRES_DB="${{ secrets.POSTGRES_DB }}" -e POSTGRES_USER="${{ secrets.POSTGRES_USER }}" -e POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -e DB_HOST="${{ secrets.DB_HOST }}" -e DB_PORT="${{ secrets.DB_PORT }}" -e REDIS_HOST="${{ secrets.REDIS_HOST }}" -e REDIS_PORT="${{ secrets.REDIS_PORT }}" -e REDIS_DB="${{ secrets.REDIS_DB }}" -e CELERY_BROKER_URL="${{ secrets.CELERY_BROKER_URL }}" -e CELERY_RESULT_BACKEND="${{ secrets.CELERY_RESULT_BACKEND }}" -e STRIPE_PUBLISHABLE_KEY="${{ secrets.STRIPE_PUBLISHABLE_KEY }}" -e STRIPE_SECRET_KEY="${{ secrets.STRIPE_SECRET_KEY }}" -e STRIPE_API_VERSION="${{ secrets.STRIPE_API_VERSION }}" -e STRIPE_WEBHOOK_SECRET="${{ secrets.STRIPE_WEBHOOK_SECRET }}" -e EMAIL_HOST_USER="${{ secrets.EMAIL_HOST_USER }}" -e EMAIL_HOST_PASSWORD="${{ secrets.EMAIL_HOST_PASSWORD }}" -e SOCIAL_AUTH_GOOGLE_OAUTH2_KEY="${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY }}" -e SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET="${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET }}" mysite python /code/mysite/manage.py migrate --noinput
       
-      - name: Trigger Render deployment
-        run: |
-          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
-            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+      # - name: Trigger Render deployment
+      #   run: |
+      #     curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+      #       -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
