@@ -40,9 +40,9 @@ jobs:
       #   run: |
       #     docker pull lemon1964/mysite:latest
 
-      - name: Set up Docker
-        run: |
-          docker build -t mysite .
+      # - name: Set up Docker
+      #   run: |
+      #     docker build -t mysite .
 
       - name: Check secrets
         run: |
