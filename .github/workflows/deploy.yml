@@ -70,6 +70,8 @@ jobs:
             -e POSTGRES_USER="${{ secrets.POSTGRES_USER }}" \
             -e POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}" \
             -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            -e DB_HOST="${{ secrets.DB_HOST }}" \
+            -e DB_PORT="${{ secrets.DB_PORT }}" \
             -e REDIS_HOST="${{ secrets.REDIS_HOST }}" \
             -e REDIS_PORT="${{ secrets.REDIS_PORT }}" \
             -e REDIS_DB="${{ secrets.REDIS_DB }}" \
