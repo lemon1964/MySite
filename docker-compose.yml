@@ -49,8 +49,6 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - DATABASE_URL=${DATABASE_URL}
-      # - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
     ports:
       - "5432:5432"
     networks:
