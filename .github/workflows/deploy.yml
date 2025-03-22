@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # С использованием образа из Docker Hubv
+      # С использованием образа из Docker Hubvи
       # - name: Pull Docker image
       #   run: |
       #     docker pull lemon1964/mysite:latest
