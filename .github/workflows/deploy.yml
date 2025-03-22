@@ -14,6 +14,9 @@ jobs:
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
       POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
       REDIS_HOST: ${{ secrets.REDIS_HOST }}
       REDIS_PORT: ${{ secrets.REDIS_PORT }}
       REDIS_DB: ${{ secrets.REDIS_DB }}
@@ -40,12 +43,10 @@ jobs:
       - name: Set up Docker
         run: |
           docker build -t mysite .
-      #     docker tag mysite registry.render.com/lemon/mysite:latest
-      #     docker push registry.render.com/lemon/mysite:latest
 
-    #   - name: Run migrations
-    #     run: |
-    #       docker run --rm mysite python manage.py migrate --noinput
+      - name: Run migrations
+        run: |
+          docker run --rm mysite python manage.py migrate --noinput
 
       - name: Trigger Render deployment (manual)
         run: |

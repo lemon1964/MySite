@@ -8,13 +8,14 @@ services:
     volumes:
       - .:/code
     environment:
-      - PORT=10000  # Указание порта для Render
-      # - DB_HOST=${DB_HOST}
-      # - DB_HOST=db
+      - PORT=10000
       - DJANGO_SETTINGS_MODULE=mysite.settings.prod
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_URL=${DATABASE_URL}
+      # - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
       - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
       - STRIPE_API_VERSION=${STRIPE_API_VERSION}
@@ -31,8 +32,8 @@ services:
       - SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=${SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET}
     depends_on:
       - db
-      # - cache
-      # - rabbitmq
+      - cache
+      - rabbitmq
     ports:
       - "10000:10000"
     networks:
@@ -47,51 +48,56 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_URL=${DATABASE_URL}
+      # - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
     ports:
       - "5432:5432"
     networks:
-    - mynetwork
-
-networks:
-  mynetwork:
-    driver: bridge
+      - mynetwork
 
 
-  # nginx:
-  #   image: nginx:1.23.1
-  #   restart: always
-  #   volumes:
-  #     - ./config/nginx:/etc/nginx/templates
-  #     - .:/code
-  #     - ./static:/code/mysite/static/
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   networks:
-  #     - mynetwork
+  nginx:
+    image: nginx:1.23.1
+    restart: always
+    volumes:
+      - ./config/nginx:/etc/nginx/templates
+      - .:/code
+      - ./static:/code/mysite/static/
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - mynetwork
 
-  # rabbitmq:
-  #   image: rabbitmq:management
-  #   restart: always
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"
-  #   environment:
-  #     - RABBITMQ_DEFAULT_USER=guest
-  #     - RABBITMQ_DEFAULT_PASS=guest
 
-  # celery_worker:
-  #   build: .
-  #   command: bash -c "cd ./mysite && celery -A mysite worker -l info"
-  #   restart: always
-  #   environment:
-  #     - DJANGO_SETTINGS_MODULE=mysite.settings.prod
-  #     - CELERY_BROKER_URL=${CELERY_BROKER_URL}
-  #   volumes:
-  #     - .:/code
-  #   depends_on:
-  #     - rabbitmq
-  #     - db
+  rabbitmq:
+    image: rabbitmq:management
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - mynetwork 
+
+
+  celery_worker:
+    build: .
+    command: bash -c "cd ./mysite && celery -A mysite worker -l info"
+    restart: always
+    environment:
+      - DJANGO_SETTINGS_MODULE=mysite.settings.prod
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+    volumes:
+      - .:/code
+    depends_on:
+      - rabbitmq
+      - db
+    networks:
+      - mynetwork 
 
   # flower:
   #   image: mher/flower
@@ -102,26 +108,31 @@ networks:
   #     - CELERY_BROKER_URL=${CELERY_BROKER_URL}
 
 
-  # daphne:
-  #   build: .
-  #   working_dir: /code/mysite/
-  #   command: ["../wait-for-it.sh", "db:5432", "--", "daphne", "-u", "/code/mysite/tmf/daphne.sock", "mysite.asgi:application"]
-  #   restart: always
-  #   volumes:
-  #     - .:/code
-  #   environment:
-  #     - DJANGO_SETTINGS_MODULE=mysite.settings.prod
-  #   depends_on:
-  #     # - db
-  #     - cache
+  daphne:
+    build: .
+    working_dir: /code/mysite/
+    command: ["../wait-for-it.sh", "db:5432", "--", "daphne", "-u", "/code/mysite/tmf/daphne.sock", "mysite.asgi:application"]
+    restart: always
+    volumes:
+      - .:/code
+    environment:
+      - DJANGO_SETTINGS_MODULE=mysite.settings.prod
+    depends_on:
+      - db
+      - cache
+    networks:
+      - mynetwork 
 
 
-  # cache:
-  #   image: redis:7.0.4
-  #   restart: always
-  #   volumes:
-  #     - ./data/cache:/data
+  cache:
+    image: redis:7.0.4
+    restart: always
+    volumes:
+      - ./data/cache:/data
+    networks:
+      - mynetwork 
 
-# networks:
-#   mynetwork:
-#     driver: bridge
+
+networks:
+  mynetwork:
+    driver: bridge

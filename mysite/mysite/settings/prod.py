@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from .base import *
 
 DEBUG = False
@@ -11,16 +12,19 @@ ADMINS = [
 ALLOWED_HOSTS = ['.mysite.com']
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': config('POSTGRES_DB'),
-       'USER': config('POSTGRES_USER'),
-       'PASSWORD': config('POSTGRES_PASSWORD'),
-       'HOST': 'db',  # Указание на контейнер базы данных, который называется db
-    #    'HOST': os.getenv('DB_HOST', 'db'),
-       'PORT': 5432,
-   }
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': config('POSTGRES_DB'),
+#        'USER': config('POSTGRES_USER'),
+#        'PASSWORD': config('POSTGRES_PASSWORD'),
+#        'HOST': 'db',  # Указание на контейнер базы данных, который называется db
+#     #    'HOST': os.getenv('DB_HOST', 'db'),
+#        'PORT': 5432,
+#    }
+# }
 
 # Продакшн настройки Redis
 REDIS_HOST = config('REDIS_HOST')  # Имя сервиса Redis из Docker Compose

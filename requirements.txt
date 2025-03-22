@@ -58,7 +58,7 @@ uwsgi==2.0.20
 daphne==3.0.2
 python-decouple==3.8
 gunicorn==20.1.0
-
+dj-database-url==2.3.0
 
 # pip install -U -r requirements.txt    в проектм
 # pip freeze > requirements.txt         из проекта
