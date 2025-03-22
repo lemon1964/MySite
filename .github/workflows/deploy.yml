@@ -44,6 +44,11 @@ jobs:
         run: |
           docker build -t mysite .
 
+      - name: Check secrets
+        run: |
+          echo ${{ secrets.SECRET_KEY }}
+          echo ${{ secrets.DATABASE_URL }}
+        
       - name: Run migrations
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
