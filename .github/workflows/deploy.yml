@@ -40,9 +40,9 @@ jobs:
       #   run: |
       #     docker pull lemon1964/mysite:latest
 
-      # - name: Set up Docker
-      #   run: |
-      #     docker build -t mysite .
+      - name: Set up Docker
+        run: |
+          docker build -t mysite .
 
       - name: Check secrets
         run: |
@@ -53,6 +53,14 @@ jobs:
         run: |
           echo $DATABASE_URL
           echo $POSTGRES_DB
+
+      - name: Check environment variables inside Docker
+        run: |
+          docker run --rm -v $(pwd):/code \
+            -e SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+            -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+            mysite env
+        
         
       # - name: Run migrations
       #   run: |
