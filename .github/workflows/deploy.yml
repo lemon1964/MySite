@@ -46,9 +46,9 @@ jobs:
 
       - name: Run migrations
         run: |
-          docker run --rm mysite python manage.py migrate --noinput
+          docker run --rm -v $(pwd):/code mysite python /code/mysite/manage.py migrate --noinput
 
-      - name: Trigger Render deployment (manual)
+      - name: Trigger Render deployment
         run: |
           curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
             -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
