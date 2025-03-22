@@ -35,7 +35,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # С использованием образа из Docker Hubт
+      # С использованием образа из Docker Hub
       # - name: Pull Docker image
       #   run: |
       #     docker pull lemon1964/mysite:latest
@@ -87,7 +87,7 @@ jobs:
             -e SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET="${{ secrets.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET }}" \
             mysite python /code/mysite/manage.py migrate --noinput
           
-
+            
       - name: Trigger Render deployment
         run: |
           curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
