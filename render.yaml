@@ -5,7 +5,7 @@ services:
     plan: free
     runtime: python
     repo: https://github.com/lemon1964/MySite.git
-    startCommand: "python /code/mysite/manage.py runserver 0.0.0.0:10000"
+    startCommand: "python mysite/manage.py runserver 0.0.0.0:10000"
     # startCommand: "uwsgi --ini /code/config/uwsgi/uwsgi.ini"
 
   # Nginx web service
