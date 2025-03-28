@@ -41,16 +41,16 @@ services:
   #   runtime: python
   #   startCommand: "daphne -u /code/mysite/tmf/daphne.sock mysite.asgi:application"
 
-  # # RabbitMQ service
-  # - type: web
-  #   name: mysite-rabbitmq
-  #   plan: free
-  #   runtime: image
-  #   image:
-  #     url: "rabbitmq:management"
-  #   envVars:
-  #     - key: RABBITMQ_DEFAULT_USER
-  #       value: guest
-  #     - key: RABBITMQ_DEFAULT_PASS
-  #       value: guest
-  #   startCommand: "rabbitmq-server"
+  # RabbitMQ service
+  - type: web
+    name: mysite-rabbitmq
+    plan: free
+    runtime: image
+    image:
+      url: "rabbitmq:management"
+    envVars:
+      - key: RABBITMQ_DEFAULT_USER
+        value: guest
+      - key: RABBITMQ_DEFAULT_PASS
+        value: guest
+    startCommand: "rabbitmq-server"
