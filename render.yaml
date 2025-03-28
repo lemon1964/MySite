@@ -25,7 +25,7 @@ services:
     plan: free
     runtime: image
     image:
-      url: "redis:4.3.4"
+      url: "redis:latest"
 
   # Celery worker service
   - type: worker
