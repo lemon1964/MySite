@@ -5,6 +5,9 @@ services:
     plan: free
     runtime: python
     repo: https://github.com/lemon1964/MySite.git
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.6
     startCommand: "python mysite/manage.py runserver 0.0.0.0:10000"
     # startCommand: "uwsgi --ini /code/config/uwsgi/uwsgi.ini"
 
