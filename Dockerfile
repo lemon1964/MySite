@@ -15,6 +15,11 @@ COPY . /code/
 RUN chmod +x /code/mysite/manage.py
 RUN chmod +x /code/mysite/db.sqlite3
 
+CMD ["uwsgi", "--ini", "/code/config/uwsgi/uwsgi.ini"]
+
+
+
+# CMD ["python", "mysite/manage.py", "runserver", "0.0.0.0:10000"]
 
 
 # # Взять официальный базовый образ Python платформы Docker

@@ -1,13 +1,11 @@
-
 services:
-
+  # Web service for Django using uwsgi
   - type: web
     name: mysite-web
     plan: free
     runtime: python
     repo: https://github.com/lemon1964/MySite.git
-    startCommand: "python manage.py runserver 0.0.0.0:8000"
-
+    startCommand: "uwsgi --ini /code/config/uwsgi/uwsgi.ini"
 
   # Nginx web service
   - type: web
@@ -28,9 +26,6 @@ services:
     runtime: image
     image:
       url: "redis:4.3.4"
-    # ipAllowList:
-    #   - source: 0.0.0.0/0
-    #     description: "Allow all IPs"
 
   # Celery worker service
   - type: worker
@@ -59,4 +54,3 @@ services:
       - key: RABBITMQ_DEFAULT_PASS
         value: guest
     startCommand: "rabbitmq-server"
-
