@@ -1,0 +1,70 @@
+{% extends 'base_posts.html' %}
+{% load static %}
+
+{% block title %}Обратная связь{% endblock %}
+
+{% block content %}
+
+<h1>Обратная связь</h1>
+
+{{ hello.q }}
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+<form name="contact-form" method="post" action="{% url 'posts:contact' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="col-md-6">
+                <label for="name" class="form-label">Имя</label>
+                {{ form.name }}
+        </div>
+        <br>
+        <div class="col-md-6">
+                <label for="email" class="form-label">Ваша почта</label>
+                {{ form.email }}
+        </div>
+    <br>
+        <div class="col-md-12">
+            <div class="md-form mb-0">
+                <label for="subject" class="form-label">Тема</label>
+                {{ form.subject }}
+            </div>
+        </div>
+    <br>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="md-form">
+                <label for="message" class="form-label">Сообщение</label>
+                {{ form.message }}
+            </div>
+        </div>
+    </div>
+    <br>
+        <div class="col-md-12">
+            <div class="md-form">
+                <label for="message" class="form-label">Введите символы</label>
+                {{ form.capatcha }}
+            </div>
+        </div>
+    <br><br>
+
+    <div class="text-center text-md-left mt-3">
+        <button class="btn btn-primary" type="submit">Отправить</button>
+    </div>
+    <br>
+</form>
+
+{% endblock %}
+
+
+

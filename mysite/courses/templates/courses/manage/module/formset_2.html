@@ -1,0 +1,55 @@
+{% load static %}
+<!-- {% load posts_tags %} -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{{title}}</title>
+	<link type="text/css" href="{% static 'css/styles.css' %}" rel="stylesheet" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="shortcut icon" href="{% static 'images/main.ico' %}" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+    <meta charset="utf-8" />
+    <title>{% block title %}Educa{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+  <body>
+        {% block mainmenu %}
+                <div class="header">
+                    <ul id="mainmenu" class="mainmenu">
+                    <li class="logo"><a href="{% url 'home_main' %}"><div class="logo"></div></a></li>
+        {% for m in mainmenu %}
+            <li><a href="{% url m.url_name %}">{{m.title}}</a></li>
+        {% endfor %}
+        
+        {% if user.is_authenticated %}
+        <li class="last"><a href="{% url 'users:profile' %}">{{user.username}}</a> | <a href="{% url 'users:logout' %}">Выйти</a></li>
+        {% else %}
+        <li class="last"><a href="{% url 'users:login' %}">Войти</a> | <a href="{% url 'users:register' %}">Регистрация</a></li>
+        {% endif %}
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+        {% endblock mainmenu %}
+
+    <div class="module">
+        <h1>Edit "{{ course.title }}"</h1>
+        <div class="module">
+          <h2>Course modules</h2>
+          <form method="post">
+            {{ formset }}
+            {{ formset.management_form }}
+            {% csrf_token %}
+            <input type="submit" value="Save modules">
+          </form>
+    </div>
+
+<!-- Footer -->
+	<div id="footer">
+		<p>&copy; 2024 Частичное или полное копирование информации с данного сайта для распространения на других ресурсах, в том числе и бумажных, строго запрещено.
+			<a href="#" style="float: right; color: yellow;">Наверх</a></p>
+	</div>
+  </body>
+</html>

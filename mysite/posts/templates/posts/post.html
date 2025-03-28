@@ -1,0 +1,55 @@
+{% extends 'base_posts.html' %}
+{% load posts_tags %}
+
+{% block breadcrumbs %}
+{% if perms.posts.change_post %}
+<p><a href="{% url 'posts:edit_page' post.slug %}">Редактировать</a></p>
+{% endif %}
+<!-- Теги -->
+{% with post.tags.all as tags %}
+{% if tags %}
+<ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in tags %}
+    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+
+{% if post.photo %}
+<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% endif %}
+
+<p>
+  <a href="{% url 'posts:post_share' post.id %}">
+    Поделиться статьей
+  </a>
+</p>
+<p>
+<a href="{% url 'posts:post_comments' post.id %}">
+  Добавить комментарий
+  </a>
+</p>
+
+{{post.content|markdown}}
+
+<div class="article-panel">
+<p class="first">
+  <a href="{% url 'posts:post_share' post.id %}">
+    Поделиться статьей
+  </a>
+</p>
+<p class="last">
+<a href="{% url 'posts:post_comments' post.id %}">
+  Комментарии
+  </a>
+</p>
+</div>
+
+{% endblock %}
+

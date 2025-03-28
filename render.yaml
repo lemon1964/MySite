@@ -1,0 +1,62 @@
+
+services:
+
+  - type: web
+    name: mysite-web
+    plan: free
+    runtime: python
+    repo: https://github.com/lemon1964/MySite.git
+    startCommand: "python manage.py runserver 0.0.0.0:8000"
+
+
+  # Nginx web service
+  - type: web
+    name: mysite-nginx
+    plan: free
+    runtime: image
+    image:
+      url: "nginx:1.23.1"
+    envVars:
+      - key: NGINX_CONFIG
+        value: ./config/nginx
+    startCommand: "nginx -g 'daemon off;'"
+
+  # Cache service using Redis
+  - type: web
+    name: mysite-cache
+    plan: free
+    runtime: image
+    image:
+      url: "redis:4.3.4"
+    # ipAllowList:
+    #   - source: 0.0.0.0/0
+    #     description: "Allow all IPs"
+
+  # Celery worker service
+  - type: worker
+    name: mysite-celery
+    plan: free
+    runtime: python
+    startCommand: "celery -A mysite worker -l info"
+
+  # Daphne worker for WebSocket connections 
+  - type: worker
+    name: mysite-daphne
+    plan: free
+    runtime: python
+    startCommand: "daphne -u /code/mysite/tmf/daphne.sock mysite.asgi:application"
+
+  # RabbitMQ service
+  - type: web
+    name: mysite-rabbitmq
+    plan: free
+    runtime: image
+    image:
+      url: "rabbitmq:management"
+    envVars:
+      - key: RABBITMQ_DEFAULT_USER
+        value: guest
+      - key: RABBITMQ_DEFAULT_PASS
+        value: guest
+    startCommand: "rabbitmq-server"
+

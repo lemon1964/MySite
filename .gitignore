@@ -1,0 +1,64 @@
+# Python Bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django settings
+*.log
+*.pot
+*.pyc
+*.pyo
+*.sqlite3
+
+# Local environment variables
+.env
+
+# Docker files
+# *.dockerfile
+# docker-compose.override.yml
+*.log
+
+# Venv
+venv/
+env/
+.venv/
+.env/
+__pypackages__/
+
+# PyCharm, VS Code, Sublime Text, etc.
+.DS_Store
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Python virtual environment
+venv/
+env/
+
+# MySQL
+*.myd
+*.myi
+
+# Django migrations folder
+*/migrations/
+
+# Static files
+# /static/
+# media/
+
+# Other
+*.bak
+*.swp
+
+# Build directories
+build/
+dist/
+*.egg-info
+
+Build.txt
+Render.txt
+docker-compose.yml
+prod-ca-2021.crt
+wait-for-it.sh
+
