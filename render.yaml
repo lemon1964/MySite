@@ -9,6 +9,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.10.6
     startCommand: "python mysite/manage.py runserver 0.0.0.0:10000"
+    buildCommand: "pip install -r /code/requirements.txt"
     # startCommand: "uwsgi --ini /code/config/uwsgi/uwsgi.ini"
 
   # Nginx web service
