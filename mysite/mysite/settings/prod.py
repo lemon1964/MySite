@@ -7,7 +7,7 @@ ADMINS = [
     ('ISM', os.environ.get('EMAIL_HOST_USER'),),
 ]
 
-ALLOWED_HOSTS = ['.mysite.com', 'mysite.com', 'www.mysite.com']
+ALLOWED_HOSTS = ['.mysite.com', 'mysite.com', 'www.mysite.com', 'mysite-web-vubo.onrender.com']
 
 DATABASES = {
     'default': {
