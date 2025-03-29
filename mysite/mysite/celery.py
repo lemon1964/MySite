@@ -4,7 +4,7 @@ from celery import Celery
 from django.conf import settings
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings.prod')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.mysite.settings.prod')
 # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
 # Создайте экземпляр Celery и укажите пространство имен для настроек.
