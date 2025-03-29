@@ -11,7 +11,7 @@ services:
         value: 3.10.6
       - key: DISABLE_POETRY
         value: "true"
-    startCommand: "gunicorn mysite.wsgi:application --bind 0.0.0.0:10000"
+    startCommand: "gunicorn mysite.mysite.wsgi:application --bind 0.0.0.0:10000"
     # startCommand: "python mysite/manage.py runserver 0.0.0.0:10000"
     # startCommand: "uwsgi --ini config/uwsgi/uwsgi.ini"
     buildCommand: "pip install -r requirements.txt"
