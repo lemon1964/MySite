@@ -19,6 +19,8 @@ DATABASES = {
 #     }
 # }
 
+
+
 # Локальные настройки Redis для mysite Educa
 CHANNEL_LAYERS = {
     'default': {
