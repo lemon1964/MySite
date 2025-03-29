@@ -4,14 +4,15 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['mysite.com']
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        'NAME': 'site',
-        'USER': 'posts',
-        'PASSWORD': '12345',
-    }
-}
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         'NAME': 'site',
+#         'USER': 'posts',
+#         'PASSWORD': '12345',
+#     }
+# }
 
 # Локальные настройки Redis для mysite Educa
 CHANNEL_LAYERS = {
