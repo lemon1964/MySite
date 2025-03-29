@@ -28,13 +28,13 @@ services:
         value: ./config/nginx
     startCommand: "nginx -g 'daemon off;'"
 
-  # # Cache service using Redis
-  # - type: web
-  #   name: mysite-cache
-  #   plan: free
-  #   runtime: image
-  #   image:
-  #     url: "redis:latest"
+  # Cache service using Redis
+  - type: web
+    name: mysite-cache
+    plan: free
+    runtime: image
+    image:
+      url: "redis:latest"
 
   # # Celery worker service
   # - type: worker
