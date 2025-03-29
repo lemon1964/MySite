@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = True
 
-# ALLOWED_HOSTS = ['mysite.com']
+ALLOWED_HOSTS = ['mysite.com', 'mysite-web-vubo.onrender.com', 'localhost', '127.0.0.1']
 
 
 # DATABASES = {
