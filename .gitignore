@@ -8,7 +8,8 @@ __pycache__/
 *.pot
 *.pyc
 *.pyo
-*.sqlite3
+# *.sqlite3
+
 
 # Local environment variables
 .env
