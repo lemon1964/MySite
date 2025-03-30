@@ -7,16 +7,22 @@ from shop.models import Product
 from shop.recommender import Recommender
 from .tasks import payment_completed
 
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+# from rest_framework.decorators import api_view, permission_classes
+# from rest_framework.permissions import AllowAny
+# import logging
+# logger = logging.getLogger(__name__)
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
 
 @csrf_exempt
-@api_view(['POST'])
-@permission_classes([AllowAny])
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
+    
+    # logger.info(f"Payload: {payload}")
+    # logger.info(f"Signature header: {sig_header}")
+
 
     try:
         event = stripe.Webhook.construct_event(
