@@ -42,10 +42,10 @@ def stripe_webhook(request):
             order.save()
 
             # save items bought for product recommendations
-            product_ids = order.items.values_list('product_id')
-            products = Product.objects.filter(id__in=product_ids)
-            r = Recommender()
-            r.products_bought(products)
+            # product_ids = order.items.values_list('product_id')
+            # products = Product.objects.filter(id__in=product_ids)
+            # r = Recommender()
+            # r.products_bought(products)
             
             # launch asynchronous task
             payment_completed.delay(order.id)
