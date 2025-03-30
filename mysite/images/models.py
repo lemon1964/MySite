@@ -30,6 +30,9 @@ class Image(models.Model):
                                         related_name='images_liked',
                                         blank=True)
     total_likes = models.PositiveIntegerField(default=0)
+    
+    total_views = models.PositiveIntegerField(default=0)
+    ranking = models.PositiveIntegerField(default=0)
 
     class Meta:
         indexes = [
