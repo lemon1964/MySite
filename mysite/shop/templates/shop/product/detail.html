@@ -24,7 +24,7 @@
     </form>
     {{ product.description|linebreaks }}
 
-    {% if recommended_products %}
+    {% comment %} {% if recommended_products %}
       <div class="recommendations">
         <h3>{% trans "People who bought this also bought" %}</h3>
         {% for p in recommended_products %}
@@ -37,7 +37,7 @@
           </div>
         {% endfor %}
       </div>
-    {% endif %}
+    {% endif %} {% endcomment %}
 
   </div>
 {% endblock %}

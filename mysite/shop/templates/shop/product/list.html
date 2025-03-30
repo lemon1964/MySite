@@ -16,7 +16,7 @@
       </li>
       {% for c in categories %}
         <li {% if category.slug == c.slug %}class="selected"{% endif %}>
-          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          {% comment %} <a href="{{ c.get_absolute_url }}">{{ c.name }}</a> {% endcomment %}
         </li>
       {% endfor %}
     </ul>
