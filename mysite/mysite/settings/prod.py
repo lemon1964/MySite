@@ -16,29 +16,31 @@ DATABASES = {
     }
 }
 
-REDIS_HOST = 'cache'
-REDIS_PORT = 6379
-REDIS_DB = 1
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [(REDIS_HOST, REDIS_PORT)],
-        },
-    },
-}
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}',
-    }
-}
+# REDIS_HOST = 'cache'
+# REDIS_PORT = 6379
+# REDIS_DB = 1
 
-REDIS_URL = 'redis://cache:6379'
-CACHES['default']['LOCATION'] = REDIS_URL
-CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [(REDIS_HOST, REDIS_PORT)],
+#         },
+#     },
+# }
+
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+#         'LOCATION': f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}',
+#     }
+# }
+
+# REDIS_URL = 'redis://cache:6379'
+# CACHES['default']['LOCATION'] = REDIS_URL
+# CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True

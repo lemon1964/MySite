@@ -1,6 +1,5 @@
-
+# Версия для бесплатного тарифа Рендер
 # import redis
-import redis
 from django.conf import settings
 from .models import Product
 

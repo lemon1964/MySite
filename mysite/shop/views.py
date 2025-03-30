@@ -4,6 +4,7 @@ from .models import Category, Product
 from .recommender import Recommender
 
 
+# Версия для бесплатного тарифа Рендер
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()

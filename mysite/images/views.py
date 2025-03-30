@@ -10,16 +10,16 @@ from django.core.paginator import Paginator, EmptyPage, \
 from .forms import ImageCreateForm
 from .models import Image, translit_to_eng
 from actions.utils import create_action
-import redis
+# import redis
 from django.conf import settings
 import requests
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
-# connect to redis
-r = redis.Redis(host=settings.REDIS_HOST,
-                port=settings.REDIS_PORT,
-                db=settings.REDIS_DB)
+# # connect to redis
+# r = redis.Redis(host=settings.REDIS_HOST,
+#                 port=settings.REDIS_PORT,
+#                 db=settings.REDIS_DB)
 
 
 @login_required
@@ -55,15 +55,36 @@ def image_create(request):
 
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
-    # increment total image views by 1
-    total_views = r.incr(f'image:{image.id}:views')
-    # increment image ranking by 1
-    r.zincrby('image_ranking', 1, image.id)
+    
+    # Убираем использование Redis для подсчета просмотров:
+    # total_views = r.incr(f'image:{image.id}:views')
+    # Можно использовать обычное хранение в базе данных, если нужно подсчитать количество просмотров:
+    image.total_views += 1
+    image.save()
+
+    # Убираем использование Redis для рейтинга:
+    # r.zincrby('image_ranking', 1, image.id)
+    # Вместо этого можно обновить рейтинг в базе данных (если это необходимо):
+    image.ranking += 1
+    image.save()
+
     return render(request,
                   'images/image/detail.html',
                   {'section': 'images',
                    'image': image,
-                   'total_views': total_views})
+                   'total_views': image.total_views})
+    
+# def image_detail(request, id, slug):
+#     image = get_object_or_404(Image, id=id, slug=slug)
+#     # increment total image views by 1
+#     total_views = r.incr(f'image:{image.id}:views')
+#     # increment image ranking by 1
+#     r.zincrby('image_ranking', 1, image.id)
+#     return render(request,
+#                   'images/image/detail.html',
+#                   {'section': 'images',
+#                    'image': image,
+#                    'total_views': total_views})
 
 
 @login_required
@@ -116,15 +137,29 @@ def image_list(request):
 
 @login_required
 def image_ranking(request):
-    # get image ranking dictionary
-    image_ranking = r.zrange('image_ranking', 0, -1,
-                             desc=True)[:10]
-    image_ranking_ids = [int(id) for id in image_ranking]
-    # get most viewed images
-    most_viewed = list(Image.objects.filter(
-                           id__in=image_ranking_ids))
-    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
+    # Убираем использование Redis для получения рейтинга:
+    # image_ranking = r.zrange('image_ranking', 0, -1,
+    #                          desc=True)[:10]
+    
+    # Вместо этого используем обычный запрос в базу данных для получения наиболее популярных изображений
+    most_viewed = Image.objects.order_by('-total_views')[:10]
+
     return render(request,
                   'images/image/ranking.html',
                   {'section': 'images',
                    'most_viewed': most_viewed})
+    
+# @login_required
+# def image_ranking(request):
+#     # get image ranking dictionary
+#     image_ranking = r.zrange('image_ranking', 0, -1,
+#                              desc=True)[:10]
+#     image_ranking_ids = [int(id) for id in image_ranking]
+#     # get most viewed images
+#     most_viewed = list(Image.objects.filter(
+#                            id__in=image_ranking_ids))
+#     most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
+#     return render(request,
+#                   'images/image/ranking.html',
+#                   {'section': 'images',
+#                    'most_viewed': most_viewed})
