@@ -1,7 +1,8 @@
 from .base import *
 import os
 
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'mysite-web-vubo.onrender.com', 'localhost', '127.0.0.1']
 
