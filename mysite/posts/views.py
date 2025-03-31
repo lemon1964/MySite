@@ -53,11 +53,12 @@ class ShowPost(DataMixin, DetailView):
         return get_object_or_404(Post.published, slug=self.kwargs[self.slug_url_kwarg])
 
 
-class AddPage(PermissionRequiredMixin, LoginRequiredMixin, DataMixin, CreateView):
+# class AddPage(PermissionRequiredMixin, LoginRequiredMixin, DataMixin, CreateView):
+class AddPage(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
     template_name = 'posts/addpage.html'
     title_page = 'Добавление статьи'
-    permission_required = 'posts.add_post' # <приложение>.<действие>_<таблица>
+    # permission_required = 'posts.add_post' # <приложение>.<действие>_<таблица>
 
     def form_valid(self, form):
         w = form.save(commit=False)
