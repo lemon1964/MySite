@@ -1,6 +1,5 @@
 
 from mysite import settings
-# from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
@@ -70,49 +69,17 @@ admin.site.site_header = "Панель администрирования"
 admin.site.index_title = "Сайт"
 
 # cd mysite
-
 # https://mysite.com/
-# docker-compose run web python mysite/manage.py migrate --noinput
 
-# docker compose down
-# docker compose up --build
-# docker compose up celery_worker
-# docker compose down celery_worker
-# docker-compose stop celery_worker
-# docker-compose start
-# docker-compose restart nginx
-# docker-compose restart celery_worker  daphne flower    rabbitmq
-# docker rm имя/id контейнера
-# docker kill c27a791e8015ca4ab58fd5073
-
-# docker-compose exec web ls -l /code/mysite/static/
-# docker-compose exec web ls -l /code/mysite/
-
-# docker exec -it my_educa_prod-daphne /bin/bash
-
+# python manage.py runserver_plus --cert-file cert.crt
 # python manage.py runserver --settings=mysite.settings.local
-# python manage.py runserver
 
     # python manage.py runserver_plus --cert-file cert.crt
     # https://mysite.com:8000/  закладки не работают
     # https://127.0.0.1:8000/   закладки работают
-# cd mysite
 
 # python3 manage.py makemigrations
 # python3 manage.py migrate
-
-# docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:management
-    # docker stop name rabbitmq
-    # RabbitMQ      http://localhost:15672   guest/guest     lemon/Q195375q
-    
-# celery -A mysite worker -l info
-    # celery -A mysite flower
-    # stripe login на 90 дней
-# stripe listen --forward-to localhost:8000/payment/webhook/
-    # stripe listen --forward-to localhost/payment/webhook/
-    # stripe listen --forward-to mysite/payment/webhook/
-    # stripe listen --forward-to https://mysite/payment/webhook/
-# docker run -it --rm --name redis -p 6379:6379 redis
 
 # lemon.design@mail.ru
 # 4242 4242 4242 4242
