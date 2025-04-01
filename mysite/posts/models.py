@@ -35,7 +35,8 @@ class Post(models.Model):
     # is_published = models.BooleanField(default=False, verbose_name="Опубликовано")
     cat = models.ForeignKey('Category', on_delete=models.PROTECT, related_name='posts', verbose_name="Рубрика")
     tags = models.ManyToManyField('TagPost', blank=True, related_name='tags', verbose_name="Теги")
-    meta = models.OneToOneField('Metadata', on_delete=models.CASCADE, null=True, blank=True, related_name='metadata', verbose_name="Метаданные")
+    meta = models.ForeignKey('Metadata', on_delete=models.CASCADE, null=True, blank=True, related_name='metadata', verbose_name="Метаданные")
+    # meta = models.OneToOneField('Metadata', on_delete=models.CASCADE, null=True, blank=True, related_name='metadata', verbose_name="Метаданные")
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, default=None)
 
     objects = models.Manager()

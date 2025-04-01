@@ -66,7 +66,8 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
         return super().form_valid(form)
 
 
-class UpdatePage(PermissionRequiredMixin, DataMixin, UpdateView):
+# class UpdatePage(PermissionRequiredMixin, DataMixin, UpdateView):
+class UpdatePage(DataMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'photo', 'is_published', 'cat']
     template_name = 'posts/addpage.html'
